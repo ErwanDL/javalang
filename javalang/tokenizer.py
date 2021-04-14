@@ -489,8 +489,11 @@ class JavaTokenizer(object):
     def tokenize(self):
         self.reset()
 
+        # Changes because of https://github.com/c2nes/javalang/issues/58
         # Convert unicode escapes
-        self.pre_tokenize()
+        # self.pre_tokenize()
+        self.data = ''.join(self.decode_data())
+        self.length = len(self.data)
 
         while self.i < self.length:
             token_type = None
